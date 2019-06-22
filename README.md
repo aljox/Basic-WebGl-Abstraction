@@ -10,4 +10,4 @@ To do:
 -Index buffer abstraction ☐  
 -Renderer abstraction ☐    
 -Canvas management ☐  
--Loading management ☐    
+-Loading management ✅       
