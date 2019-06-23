@@ -24,4 +24,18 @@ window.onload = function(){
 
 function setPrograms(loadObjects){
   //TODO set shader objects and initialise programs
+  let programs = [];
+  let shaders = [];
+
+  for(let loadObj of loadObjects){
+    shaders.push(new shaderObj(loadObj));
+  }
+
+  for(let i = 0; i < shaders.length / 2; i++){
+    programs.push(new programObj(shaders[i * 2], shaders[i * 2 + 1]));
+  }
+
+  for(let program of programs){
+    console.log(program);
+  }
 }

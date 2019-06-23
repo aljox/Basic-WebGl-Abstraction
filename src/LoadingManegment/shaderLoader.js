@@ -15,6 +15,8 @@ class shaderLoader {
     });
   }
 
+  getType(){return this.type;}
+  getUrl(){return this.url;}
   getLoadFlag(){return this.loadFlag;}
   getData(){return this.data;}
 }

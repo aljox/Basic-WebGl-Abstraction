@@ -12,7 +12,10 @@ class loadManager {
       let type = this.setType(url);
 
       switch(type){
-        case "SHADER":
+        case "VERTEX_SHADER":
+          this.loadObjects.push(new shaderLoader(type, "/res/Shaders/" + url));
+          break;
+        case "FRAGMENT_SHADER":
           this.loadObjects.push(new shaderLoader(type, "/res/Shaders/" + url));
           break;
         default:
@@ -29,9 +32,8 @@ class loadManager {
   //Set type of file
   //Implemented only for shaders
   setType(url){
-    if(url.search(".vertex") != -1 || url.search(".fragment") != -1){
-      return "SHADER";
-    }
+    if(url.search(".vertex") != -1){return "VERTEX_SHADER";}
+    if(url.search(".fragment") != -1){return "FRAGMENT_SHADER";}
 
     return "UNKNOWN";
   }
