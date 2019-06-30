@@ -5,10 +5,11 @@ class shaderObj {
     this.attributeLocationNames = [];
     this.uniformLocationNames = [];
     this.setLocationNames();
-    
+
     this.shader = this.createAndCompileShader();
   }
 
+  //Parse source to get location names - must be in format a_nameofattribute or u_nameofuniform
   setLocationNames(){
     let indexMain = -1;
     let index = 0;

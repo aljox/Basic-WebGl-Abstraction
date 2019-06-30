@@ -9,38 +9,41 @@ class programObj {
     this.setLocations();
   }
 
-  setLocations(){
+  //Input: param1: vertexArray
+  //       param2: TODO: uniform abstraction
+  setProgramParameters(vertexArray, uniformSetters){
+    this.setAttributes(vertexArray);
+    //this.setUniforms(uniformSetters);
+  }
+
+  //Set attributes according to specified locations - names of attributes must be in sync with names of locations.
+  //Example:
+  //-Name of location: a_nameLoc
+  //-Name of attribute: a_name
+  setAttributes(vertexArray){
     let attribLocationNames = this.vertexShader.getAttributeLocationNames().concat(this.fragmentShader.getAttributeLocationNames());
-    let uniformLocationNames = this.vertexShader.getUniformLocationNames().concat(this.fragmentShader.getUniformLocationNames());
 
-    for(let locationName of attribLocationNames){
-      this.attributeLocations[locationName + "Loc"] = gl.getAttribLocation(this.program, locationName);
-    }
+    let vertexBufferArray = vertexArray.getVertexBufferArray();
+    for(let name of attribLocationNames){
+      let index = this.findIndex(name, vertexBufferArray);
+      if(index === -1) throw Error("Property " + name + " not found in vertexArray object");
 
-    for(let locationName of uniformLocationNames){
-      this.uniformLocations[locationName + "Loc"] = gl.getUniformLocation(this.program, locationName);
+      gl.enableVertexAttribArray(this.attributeLocations[name + "Loc"]);
+      vertexBufferArray[index].getAttributeBuffer().bind();
+      gl.vertexAttribPointer(this.attributeLocations[name + "Loc"], vertexBufferArray[index].getNumOfComponents(),
+                              gl[vertexBufferArray[index].getTypeOfValue()], vertexBufferArray[index].getNormalisation(),
+                              vertexBufferArray[index].getStride(), vertexBufferArray[index].getOffset());
     }
   }
 
-  setProgramParameters(attribiteSetters, uniformSetters){
-    this.setAttributes(attribiteSetters);
-    this.setUniforms(uniformSetters);
-  }
-
-  setAttributes(attribiteSetters){
-      let attribLocationNames = this.vertexShader.getAttributeLocationNames().concat(this.fragmentShader.getAttributeLocationNames());
-
-      for(let name of attribLocationNames){
-          if(!(attribiteSetters.hasOwnProperty(name))){
-              throw Error("Property " + name + " not found in attribiteSetters object");
-          }
-
-          gl.enableVertexAttribArray(this.attributeLocations[name + "Loc"]);
-          gl.bindBuffer(gl.ARRAY_BUFFER, attribiteSetters[name].buffer);
-          gl.vertexAttribPointer(this.attributeLocations[name + "Loc"], attribiteSetters[name].numOfComponents,
-                                  gl[attribiteSetters[name].typeValue],attribiteSetters[name].normalisation,
-                                   attribiteSetters[name].stride, attribiteSetters[name].offset);
+  //Search buffer according to location name
+  findIndex(name, vertexBufferArray){
+    for(let i = 0; i < vertexBufferArray.length; i++){
+      if(vertexBufferArray[i].getName() === name){
+          return i;
       }
+    }
+    return -1;
   }
 
   setUniforms(uniformSetters){
@@ -66,6 +69,19 @@ class programObj {
       } else if(uniformSetters[name].property.search("1fv") != -1){
         gl["uniform" + uniformSetters[name].property](this.uniformLocations[name + "Loc"], uniformSetters[name].value);
       }
+    }
+  }
+
+  setLocations(){
+    let attribLocationNames = this.vertexShader.getAttributeLocationNames().concat(this.fragmentShader.getAttributeLocationNames());
+    let uniformLocationNames = this.vertexShader.getUniformLocationNames().concat(this.fragmentShader.getUniformLocationNames());
+
+    for(let locationName of attribLocationNames){
+      this.attributeLocations[locationName + "Loc"] = gl.getAttribLocation(this.program, locationName);
+    }
+
+    for(let locationName of uniformLocationNames){
+      this.uniformLocations[locationName + "Loc"] = gl.getUniformLocation(this.program, locationName);
     }
   }
 
