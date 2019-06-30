@@ -4,10 +4,11 @@ Basic abstraction of vertex buffers, shaders, programs and renderer in WebGl1.
 Base for future projects.
 
 To do:  
--Shader abstraction ✅ -add comments!  
--Program abstraction ✅ -add comments!   
--Vertex buffer abstraction ☐  
--Index buffer abstraction ☐  
+-Shader abstraction ✅     
+-Program abstraction ✅     
+-Vertex buffer abstraction ✅    
+-Index buffer abstraction ☐   
+-Uniform abstraction ☐  
 -Renderer abstraction ☐    
 -Canvas management ☐  
 -Loading management ✅        
