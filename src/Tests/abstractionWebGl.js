@@ -53,18 +53,18 @@ function setBuffers(){
   let positionBuffer = new attributeBuffer("ARRAY_BUFFER", new Float32Array(bufferPos), "STATIC_DRAW");
 
   let bufferColour = [
-    1, 0, 0, 1,
-    0, 1, 0, 1,
-    0, 0, 1, 0,
-    1, 0, 1, 1,
-    0, 1, 0, 1,
-    1, 0, 0, 0,
-    //0, 0, 255, 255,
+    1.0, 0.0, 0.0, 1.0,
+    0.0, 1.0, 0.0, 1.0,
+    0.0, 0.0, 1.0, 1.0,
+    1.0, 0.0, 1.0, 1.0,
+    0.0, 1.0, 0.0, 1.0,
+    1.0, 0.0, 0.0, 1.0,
   ];
-  let colourBuffer = new attributeBuffer("ARRAY_BUFFER", new Uint8Array(bufferColour), "STATIC_DRAW");
+  let colourBuffer = new attributeBuffer("ARRAY_BUFFER", new Float32Array(bufferColour), "STATIC_DRAW");
 
-  let vertexBufferArray = [new bufferSpec("a_position", positionBuffer, 2, "FLOAT", false), new bufferSpec("a_colour", colourBuffer, 4, "UNSIGNED_BYTE", false)];
+  let vertexBufferArray = [new bufferSpec("a_position", positionBuffer, 2, "FLOAT", false), new bufferSpec("a_colour", colourBuffer, 4, "FLOAT", false)];
   vertArray = new vertexArray(vertexBufferArray, null);
+  vertArray.combineBuffers();
 }
 
 function render(programs){

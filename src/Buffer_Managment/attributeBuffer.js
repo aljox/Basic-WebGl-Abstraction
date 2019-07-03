@@ -23,4 +23,5 @@ class attributeBuffer{
 
   getData(){return this.data;}
   getType(){return this.type;}
+  getUsage(){return this.usage;}
 }

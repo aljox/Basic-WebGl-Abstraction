@@ -30,6 +30,10 @@ class bufferSpec{
     return sizeOfType * this.numOfComponents;
   }
 
+  numOfVertex(){
+    return this.attributeBuffer.getData().length / this.numOfComponents;
+  }
+
   setAttributeBuffer(attributeBuffer){this.attributeBuffer = attributeBuffer;}
   setTypeOfValue(typeOfValue){this.typeOfValue = typeOfValue;}
   setNormalisation(normalisation){this.normalisation = normalisation;}

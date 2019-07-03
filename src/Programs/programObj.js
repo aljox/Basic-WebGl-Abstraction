@@ -12,7 +12,7 @@ class programObj {
   //Input: param1: vertexArray
   //       param2: TODO: uniform abstraction
   setProgramParameters(vertexArray, uniformSetters){
-    this.setAttributes(vertexArray);
+      this.setAttributes(vertexArray);
     //this.setUniforms(uniformSetters);
   }
 
@@ -29,7 +29,14 @@ class programObj {
       if(index === -1) throw Error("Property " + name + " not found in vertexArray object");
 
       gl.enableVertexAttribArray(this.attributeLocations[name + "Loc"]);
-      vertexBufferArray[index].getAttributeBuffer().bind();
+
+      //Check if combineBuffer was created
+      if(vertexArray.getCombinedBuffer() === null){
+        vertexBufferArray[index].getAttributeBuffer().bind();
+      } else {
+        vertexArray.getCombinedBuffer().bind();
+      }
+
       gl.vertexAttribPointer(this.attributeLocations[name + "Loc"], vertexBufferArray[index].getNumOfComponents(),
                               gl[vertexBufferArray[index].getTypeOfValue()], vertexBufferArray[index].getNormalisation(),
                               vertexBufferArray[index].getStride(), vertexBufferArray[index].getOffset());
