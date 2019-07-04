@@ -62,15 +62,30 @@ function setBuffers(){
   ];
   let colourBuffer = new attributeBuffer("ARRAY_BUFFER", new Float32Array(bufferColour), "STATIC_DRAW");
 
+  let indexBuf = [
+    0, 1, 2,
+    3, 4, 5,
+  ];
+
+  let indexBuffer = new attributeBuffer("ELEMENT_ARRAY_BUFFER", new Uint16Array(indexBuf), "STATIC_DRAW");
+
   let vertexBufferArray = [new bufferSpec("a_position", positionBuffer, 2, "FLOAT", false), new bufferSpec("a_colour", colourBuffer, 4, "FLOAT", false)];
-  vertArray = new vertexArray(vertexBufferArray, null);
+  vertArray = new vertexArray(vertexBufferArray, indexBuffer);
+  //vertArray = new vertexArray(vertexBufferArray, null);
   vertArray.combineBuffers();
 }
 
 function render(programs){
+  gl.clearColor(0.5, 0.5, 0.5, 1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
   gl.useProgram(programs[0].getProgram());
   programs[0].setProgramParameters(vertArray, null);
 
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  if(vertArray.getIndexBuffer() === null){
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  } else {
+    vertArray.getIndexBuffer().bind();
+    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+  }
 }

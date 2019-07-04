@@ -75,5 +75,6 @@ class vertexArray{
 
   getElemetVertexBufferArray(i){return this.vertexBufferArray[i];}
   getVertexBufferArray(){return this.vertexBufferArray;}
+  getIndexBuffer(){return this.indexBuffer;}
   getCombinedBuffer(){return this.combinedBuffer;}
 }
