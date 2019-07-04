@@ -7,7 +7,7 @@ To do:
 -Shader abstraction ✅     
 -Program abstraction ✅     
 -Vertex buffer abstraction ✅    
--Index buffer abstraction ☐   
+-Index buffer abstraction ✅     
 -Uniform abstraction ☐  
 -Renderer abstraction ☐    
 -Canvas management ☐  
