@@ -10,10 +10,10 @@ To do:
 -Index buffer abstraction ✅     
 -Uniform abstraction ☐  
 -Renderer abstraction ✅      
--Canvas management ☐ - not urgent
--Loading management ✅    
+-Canvas management ☐ - not urgent  
+-Loading management ✅      
 -OBJ loading/managment ☐  
 -Basic 3D support ☐  
--Camera abstraction ☐
--Object manipulation ☐
--Rendering multiple objects ☐
+-Camera abstraction ☐  
+-Object manipulation ☐  
+-Rendering multiple objects ☐  
