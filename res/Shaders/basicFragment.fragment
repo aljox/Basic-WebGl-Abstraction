@@ -1,7 +1,9 @@
 precision mediump float;
 
+uniform float u_offset;
+
 varying vec4 v_colour;
 
 void main() {
-   gl_FragColor = v_colour;
+   gl_FragColor = v_colour + vec4(u_offset, u_offset, u_offset, 0.0);
 }

@@ -11,9 +11,9 @@ class programObj {
 
   //Input: param1: vertexArray
   //       param2: TODO: uniform abstraction
-  setProgramParameters(vertexArray, uniformSetters){
-      this.setAttributes(vertexArray);
-    //this.setUniforms(uniformSetters);
+  setProgramParameters(vertexArray, uniformArray){
+    this.setAttributes(vertexArray);
+    this.setUniforms(uniformArray);
   }
 
   //Set attributes according to specified locations - names of attributes must be in sync with names of locations.
@@ -25,7 +25,7 @@ class programObj {
 
     let vertexBufferArray = vertexArray.getVertexBufferArray();
     for(let name of attribLocationNames){
-      let index = this.findIndex(name, vertexBufferArray);
+      let index = this.findIndexVertex(name, vertexBufferArray);
       if(index === -1) throw Error("Property " + name + " not found in vertexArray object");
 
       gl.enableVertexAttribArray(this.attributeLocations[name + "Loc"]);
@@ -44,7 +44,7 @@ class programObj {
   }
 
   //Search buffer according to location name
-  findIndex(name, vertexBufferArray){
+  findIndexVertex(name, vertexBufferArray){
     for(let i = 0; i < vertexBufferArray.length; i++){
       if(vertexBufferArray[i].getName() === name){
           return i;
@@ -53,30 +53,38 @@ class programObj {
     return -1;
   }
 
-  setUniforms(uniformSetters){
+  //TODO: Add support for per object uniforms
+  setUniforms(uniformArray){
     let uniformLocationNames = this.vertexShader.getUniformLocationNames().concat(this.fragmentShader.getUniformLocationNames());
 
+    let universalUniform = uniformArray.getUniversalUniform();
     for(let name of uniformLocationNames){
       //Not complete for all gl.uniform commands
 
       if(name === "u_sampler") continue;
 
-      if(!(uniformSetters.hasOwnProperty(name))){
-          throw Error("Property " + name + " not found in uniformSetters object");
-      }
+      let index = this.findIndexUniform(name, universalUniform);
+      if(index === -1) throw Error("Property " + name + " not found in uniformArray object");
 
-      if(uniformSetters[name].property.search("1f") != -1){
-        gl["uniform" + uniformSetters[name].property](this.uniformLocations[name + "Loc"], uniformSetters[name].value);
+      if(universalUniform[index].getProperty().search("1") != -1){
+        gl["uniform" + universalUniform[index].getProperty()](this.uniformLocations[name + "Loc"], universalUniform[index].getValue());
 
-      } else if(uniformSetters[name].property.search("2f") != -1){
-        let valueArray =  uniformSetters[name].value;
+      } else if(universalUniform[index].getProperty().search("2") != -1) {
 
-        gl["uniform" + uniformSetters[name].property](this.uniformLocations[name + "Loc"], valueArray[0], valueArray[1]);
-
-      } else if(uniformSetters[name].property.search("1fv") != -1){
-        gl["uniform" + uniformSetters[name].property](this.uniformLocations[name + "Loc"], uniformSetters[name].value);
+        let valueArray =  universalUniform[index].getValue();
+        gl["uniform" + universalUniform[index].getProperty()](this.uniformLocations[name + "Loc"], valueArray[0], valueArray[1]);
       }
     }
+  }
+
+  //Search uniforms according to location name
+  findIndexUniform(name, universalUniform){
+    for(let i = 0; i < universalUniform.length; i++){
+      if(universalUniform[i].getName() === name){
+        return i;
+      }
+    }
+    return -1;
   }
 
   setLocations(){

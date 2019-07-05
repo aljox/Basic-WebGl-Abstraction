@@ -7,6 +7,7 @@ if(!gl){
 
 let shaderSourceData = [];
 let vertArray;
+let uniArray;
 
 window.onload = function(){
   let shaderLoadList = ["basicVertex.vertex", "basicFragment.fragment"];
@@ -37,6 +38,9 @@ function setPrograms(loadObjects){
 }
 
 function setBuffers(){
+  let offsetUniform = new uniform("u_offset", "1f", 0.2);
+  uniArray = new uniformArray([offsetUniform], null, null);
+
   let bufferPos = [
     -1.0, -0.5,
     -0.5, 0.5,
@@ -66,11 +70,10 @@ function setBuffers(){
 
   let vertexBufferArray = [new bufferSpec("a_position", positionBuffer, 2, "FLOAT", false), new bufferSpec("a_colour", colourBuffer, 4, "FLOAT", false)];
   vertArray = new vertexArray(vertexBufferArray, indexBuffer);
-  //vertArray = new vertexArray(vertexBufferArray, null);
   vertArray.combineBuffers();
 }
 
 function render(programs){
   let renderer = new Renderer(0);
-  renderer.render(canvas, programs[0], vertArray, null);
+  renderer.render(canvas, programs[0], vertArray, uniArray);
 }
