@@ -8,7 +8,7 @@ To do:
 -Program abstraction ✅     
 -Vertex buffer abstraction ✅    
 -Index buffer abstraction ✅     
--Uniform abstraction ☐  
+-Uniform abstraction ✅ -- TODO: per object uniforms    
 -Renderer abstraction ✅      
 -Canvas management ☐ - not urgent  
 -Loading management ✅      
