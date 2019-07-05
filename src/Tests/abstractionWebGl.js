@@ -12,17 +12,12 @@ window.onload = function(){
   let shaderLoadList = ["basicVertex.vertex", "basicFragment.fragment"];
 
   //LoadShaders
-  //TODO: Loading management
   let loadMan = new loadManager(shaderLoadList);
   loadMan.executeLoad();
   loadMan.waitLoad(setPrograms);
-  //waitLoad(loadMan);
 
-  //Set data??
-
+  //Set data
   setBuffers();
-
-  //RENDER initialise it???
 };
 
 function setPrograms(loadObjects){
@@ -76,16 +71,6 @@ function setBuffers(){
 }
 
 function render(programs){
-  gl.clearColor(0.5, 0.5, 0.5, 1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-  gl.useProgram(programs[0].getProgram());
-  programs[0].setProgramParameters(vertArray, null);
-
-  if(vertArray.getIndexBuffer() === null){
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-  } else {
-    vertArray.getIndexBuffer().bind();
-    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
-  }
+  let renderer = new Renderer(0);
+  renderer.render(canvas, programs[0], vertArray, null);
 }
