@@ -9,6 +9,6 @@ To do:
 -Vertex buffer abstraction ✅    
 -Index buffer abstraction ✅     
 -Uniform abstraction ☐  
--Renderer abstraction ☐    
+-Renderer abstraction ✅      
 -Canvas management ☐  
 -Loading management ✅        
