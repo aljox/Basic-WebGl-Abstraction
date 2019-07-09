@@ -15,5 +15,5 @@ To do:
 -OBJ loading/managment ☐  
 -Basic 3D support ☐  
 -Camera abstraction ☐  
--Object manipulation ☐  
+-Object manipulation ✅  -- TODO: vector matrix multiplication    
 -Rendering multiple objects ☐  
