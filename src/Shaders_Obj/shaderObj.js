@@ -1,4 +1,4 @@
-class shaderObj {
+class ShaderObj {
   constructor(loadObject){
     this.type = loadObject.getType();
     this.source = loadObject.getData();

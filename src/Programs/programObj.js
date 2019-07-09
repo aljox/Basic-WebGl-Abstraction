@@ -1,4 +1,4 @@
-class programObj {
+class ProgramObj {
   constructor(vertexShader, fragmentShader){
     this.vertexShader = vertexShader;
     this.fragmentShader = fragmentShader;
@@ -60,7 +60,6 @@ class programObj {
     let universalUniform = uniformArray.getUniversalUniform();
     for(let name of uniformLocationNames){
       //Not complete for all gl.uniform commands
-
       if(name === "u_sampler") continue;
 
       let index = this.findIndexUniform(name, universalUniform);
@@ -73,6 +72,11 @@ class programObj {
 
         let valueArray =  universalUniform[index].getValue();
         gl["uniform" + universalUniform[index].getProperty()](this.uniformLocations[name + "Loc"], valueArray[0], valueArray[1]);
+      } else if(universalUniform[index].getProperty().search("3fv") != -1){
+        gl["uniform" + universalUniform[index].getProperty()](this.uniformLocations[name + "Loc"], false, universalUniform[index].getValue());
+
+      } else if(universalUniform[index].getProperty().search("4fv") != -1){
+        gl["uniform" + universalUniform[index].getProperty()](this.uniformLocations[name + "Loc"], false, universalUniform[index].getValue());
       }
     }
   }

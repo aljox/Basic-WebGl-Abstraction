@@ -1,5 +1,5 @@
 //TODO: implement per object uniforms
-class uniformArray {
+class UniformArray {
   constructor(universalUniform, perObjectComputedUniform, perObjectUniform){
     this.universalUniform = universalUniform;
     this.perObjectComputedUniform = perObjectComputedUniform;

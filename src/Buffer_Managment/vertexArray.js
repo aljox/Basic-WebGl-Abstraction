@@ -1,6 +1,6 @@
 //Main function of vertexArray is to combine multiple buffers into one uniform for better performance
 
-class vertexArray{
+class VertexArray{
   constructor(vertexBufferArray, indexBuffer){
     //vertexBufferArray - array of buffers defined by bufferSpec
     this.vertexBufferArray = vertexBufferArray;
@@ -39,7 +39,7 @@ class vertexArray{
     }
 
     let infoSetter = this.vertexBufferArray[0].getAttributeBuffer();
-    this.combinedBuffer = new attributeBuffer(infoSetter.getType(), new Float32Array(buffer), infoSetter.getUsage());
+    this.combinedBuffer = new AttributeBuffer(infoSetter.getType(), new Float32Array(buffer), infoSetter.getUsage());
   }
 
   canCombine(){

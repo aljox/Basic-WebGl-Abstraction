@@ -1,4 +1,4 @@
-class shaderLoader {
+class ShaderLoader {
   constructor(type, url){
     this.type = type;
     this.url = url;

@@ -1,5 +1,5 @@
 //Input: names of files to load - in this case only shaders - can be expanded
-class loadManager {
+class LoadManager {
   constructor(loadList){
     this.loadList = loadList;
     this.loadObjects = [];
@@ -13,10 +13,10 @@ class loadManager {
 
       switch(type){
         case "VERTEX_SHADER":
-          this.loadObjects.push(new shaderLoader(type, "/res/Shaders/" + url));
+          this.loadObjects.push(new ShaderLoader(type, "/res/Shaders/" + url));
           break;
         case "FRAGMENT_SHADER":
-          this.loadObjects.push(new shaderLoader(type, "/res/Shaders/" + url));
+          this.loadObjects.push(new ShaderLoader(type, "/res/Shaders/" + url));
           break;
         default:
           throw Error("Unknown file load type.");

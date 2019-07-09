@@ -1,5 +1,5 @@
 //Data must be passed in correct array cast!
-class attributeBuffer{
+class AttributeBuffer{
   constructor(type, data, usage){
     this.type = type;
     this.data = data;

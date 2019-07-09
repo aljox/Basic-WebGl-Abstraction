@@ -1,5 +1,5 @@
 //Specification for buffer
-class bufferSpec{
+class BufferSpec{
   constructor(name, attributeBuffer, numOfComponents, typeOfValue, normalisation){
     this.name = name;
     this.attributeBuffer = attributeBuffer;
