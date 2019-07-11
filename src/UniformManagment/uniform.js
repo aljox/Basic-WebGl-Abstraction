@@ -28,11 +28,11 @@ class UniformMatrix extends Uniform{
 }
 
 //Matrix is array of 5 Matrix33 or Matrix44 loadObjects
-//First_Element: rotation
-//Second_Element: scaleX
-//Third_Element: scaleY
-//Fouth_Element: translation x
-//Fifth_Element: translation y
+//First_Element: scaleX
+//Second_Element: scaleY
+//Third_Element: translation x
+//Fouth_Element: translation y
+//Fifth_Element: rotation
 class ObjectManipulationUniform extends Uniform{
   constructor(name, property, matrixArray){
     let infoMatrix = matrixArray[0];
@@ -67,19 +67,19 @@ class ObjectManipulationUniform extends Uniform{
   setMatrixArrayElement(matrix, name){
 
     switch(name){
-      case "ROTATION":
+      case "SCALEX":
         this.matrixArray[0] = matrix;
         break;
-      case "SCALEX":
+      case "SCALEY":
         this.matrixArray[1] = matrix;
         break;
-      case "SCALEY":
+      case "TRANSLATEX":
         this.matrixArray[2] = matrix;
         break;
-      case "TRANSLATEX":
+      case "TRANSLATEY":
         this.matrixArray[3] = matrix;
         break;
-      case "TRANSLATEY":
+      case "ROTATION":
         this.matrixArray[4] = matrix;
         break;
       default:

@@ -40,12 +40,12 @@ function setPrograms(loadObjects){
 
 function setUniforms(){
   let offsetUniform = new Uniform("u_offset", "1f", 0.2);
-  
-  let manipulationArray = [Matrix33.rotation(MathC.degreeToRadian(0)),
-                           Matrix33.scaleX(1),
+
+  let manipulationArray = [Matrix33.scaleX(1),
                            Matrix33.scaleY(1),
                            Matrix33.translateX(0),
                            Matrix33.translateY(0),
+                           Matrix33.rotation(MathC.degreeToRadian(0)),
                          ];
 
   let manipulationUnform = new ObjectManipulationUniform("u_matrix", "3fv", manipulationArray);
@@ -58,9 +58,9 @@ function setBuffers(){
     -1.0, -0.5,
     -0.5, 0.5,
     0.0, -0.5,
-    /*0.0, -0.5,
+    0.0, -0.5,
     0.5, 0.5,
-    1.0, -0.5,*/
+    1.0, -0.5,
   ];
   let positionBuffer = new AttributeBuffer("ARRAY_BUFFER", new Float32Array(bufferPos), "STATIC_DRAW");
 
@@ -68,15 +68,15 @@ function setBuffers(){
     1.0, 0.0, 0.0, 1.0,
     0.0, 1.0, 0.0, 1.0,
     0.0, 0.0, 1.0, 1.0,
-    /*1.0, 0.0, 1.0, 1.0,
+    1.0, 0.0, 1.0, 1.0,
     0.0, 1.0, 0.0, 1.0,
-    1.0, 0.0, 0.0, 1.0,*/
+    1.0, 0.0, 0.0, 1.0,
   ];
   let colourBuffer = new AttributeBuffer("ARRAY_BUFFER", new Float32Array(bufferColour), "STATIC_DRAW");
 
   let indexBuf = [
     0, 1, 2,
-    /*3, 4, 5,*/
+    3, 4, 5,
   ];
 
   let indexBuffer = new AttributeBuffer("ELEMENT_ARRAY_BUFFER", new Uint16Array(indexBuf), "STATIC_DRAW");
