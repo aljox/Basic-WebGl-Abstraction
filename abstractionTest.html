@@ -27,9 +27,33 @@
     <!-- renderer -->
     <script src= "./src/Renderer/Renderer.js"></script>
 
+    <style>
+      .slidecontainer{
+        position: absolute;
+        top:0;
+        right:0;
+      }
+    </style>
+
   </head>
   <body>
-    <canvas id= "canvas" width= "400" height= "400" class="canvas"></canvas>
+    <div class="slidecontainer">
+      <p>ScaleX</p>
+      <input type="range" min="0" max="2000" value="1000" class="ScaleX" id="scaleX">
+      <p>ScaleY</p>
+      <input type="range" min="0" max="2000" value="1000" class="ScaleY" id="scaleY">
+      <p>Rotation</p>
+      <input type="range" min="-3600" max="3600" value="0" class="Rotation" id="rotation">
+      <p>TranslationX</p>
+      <input type="range" min="-3000" max="3000" value="0" class="TranslationX" id="translationX">
+      <p>TranslationY</p>
+      <input type="range" min="-3000" max="3000" value="0" class="TranslationY" id="translationY">
+    </div>
+
+    <!-- Events -->
+    <script src= "./src/Events/SliderEvents.js"></script>
+
+    <canvas id= "canvas" width= "600" height= "600" class="canvas"></canvas>
 
     <!-- Test program -->
     <script src= "./src/Tests/abstractionWebGl.js"></script>

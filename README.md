@@ -16,4 +16,5 @@ To do:
 -Basic 3D support ☐  
 -Camera abstraction ☐  
 -Object manipulation ✅  -- TODO: vector matrix multiplication    
+-Sliders for testing object manipulation ✅   
 -Rendering multiple objects ☐  

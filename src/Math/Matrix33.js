@@ -11,10 +11,22 @@ class Matrix33 {
                      0, 0, 1]);
   }
 
-  static translation(tx, ty){
+  static translate(tx, ty){
     return new this([1, 0, 0,
                      0, 1, 0,
                      tx, ty, 1]);
+  }
+
+  static translateX(tx){
+    return new this([1, 0, 0,
+                     0, 1, 0,
+                     tx, 0, 1]);
+  }
+
+  static translateY(ty){
+    return new this([1, 0, 0,
+                     0, 1, 0,
+                     0, ty, 1]);
   }
 
   static rotation(angleRadians){
@@ -28,6 +40,18 @@ class Matrix33 {
 
   static scale(sx, sy){
     return new this([sx, 0, 0,
+                     0, sy, 0,
+                     0, 0, 1]);
+  }
+
+  static scaleX(sx){
+    return new this([sx, 0, 0,
+                     0, 1, 0,
+                     0, 0, 1]);
+  }
+
+  static scaleY(sy){
+    return new this([1, 0, 0,
                      0, sy, 0,
                      0, 0, 1]);
   }
@@ -195,6 +219,16 @@ static inverse(M){
       b20 * a01 + b21 * a11 + b22 * a21,
       b20 * a02 + b21 * a12 + b22 * a22,
     ]);
+  }
+
+  //0 index --> first matrix from right!
+  static multiplyArray(matrixArray){
+    let matrix = Matrix33.identity();
+    for(let i = 0; i < matrixArray.length; i++){
+      matrix = Matrix33.multiply(matrix, matrixArray[i]);
+    }
+
+    return matrix;
   }
 
   setMatrix(matrix){this.matrix = matrix;}

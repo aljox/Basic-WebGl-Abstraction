@@ -26,3 +26,70 @@ class UniformMatrix extends Uniform{
 
   getMatrix(){return this.matrix;}
 }
+
+//Matrix is array of 5 Matrix33 or Matrix44 loadObjects
+//First_Element: rotation
+//Second_Element: scaleX
+//Third_Element: scaleY
+//Fouth_Element: translation x
+//Fifth_Element: translation y
+class ObjectManipulationUniform extends Uniform{
+  constructor(name, property, matrixArray){
+    let infoMatrix = matrixArray[0];
+    let matrix;
+    if(infoMatrix instanceof Matrix33){
+      matrix = Matrix33.multiplyArray(matrixArray);
+      super(name, "Matrix" + property, new Float32Array(matrix.getMatrix()));
+    } else if(infoMatrix instanceof Matrix44){
+      matrix = Matrix44.multiplyArray(matrixArray);
+      super(name, "Matrix" + property, new Float32Array(matrix.getMatrix()));
+    }
+
+    this.matrixArray = matrixArray;
+    this.matrix = matrix;
+  }
+
+  setMatrixArray(matrixArray){
+    let infoMatrix = matrixArray[0];
+    let matrix;
+
+    if(infoMatrix instanceof Matrix33){
+      matrix = Matrix33.multiplyArray(matrixArray);
+    } else if(infoMatrix instanceof Matrix44){
+      matrix = Matrix44.multiplyArray(matrixArray);
+    }
+
+    this.matrixArray = matrixArray;
+    this.matrix = matrix;
+    super.setValue(new Float32Array(matrix.getMatrix()));
+  }
+
+  setMatrixArrayElement(matrix, name){
+
+    switch(name){
+      case "ROTATION":
+        this.matrixArray[0] = matrix;
+        break;
+      case "SCALEX":
+        this.matrixArray[1] = matrix;
+        break;
+      case "SCALEY":
+        this.matrixArray[2] = matrix;
+        break;
+      case "TRANSLATEX":
+        this.matrixArray[3] = matrix;
+        break;
+      case "TRANSLATEY":
+        this.matrixArray[4] = matrix;
+        break;
+      default:
+        throw Error("Unknown name of manipulation matrix array.");
+        break;
+    }
+    this.setMatrixArray(this.matrixArray);
+  }
+
+  getMatrixArray(){return this.matrixArray;}
+  getMatrixArrayElemetn(i){return this.matrixArray[i];}
+  getMatrix(){return this.matrix;}
+}

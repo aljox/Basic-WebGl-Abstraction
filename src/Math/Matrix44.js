@@ -10,11 +10,32 @@ class Matrix44 {
                      0, 0, 0, 1]);
   }
 
-  static translation(tx, ty, tz){
+  static translate(tx, ty, tz){
     return new this([1, 0, 0, 0,
                      0, 1, 0, 0,
                      0, 0, 1, 0,
                      tx, ty, tz, 1]);
+  }
+
+  static translateX(tx){
+    return new this([1, 0, 0, 0,
+                     0, 1, 0, 0,
+                     0, 0, 1, 0,
+                     tx, 0, 0, 1]);
+  }
+
+  static translateY(ty){
+    return new this([1, 0, 0, 0,
+                     0, 1, 0, 0,
+                     0, 0, 1, 0,
+                     0, ty, 0, 1]);
+  }
+
+  static translateZ(tz){
+    return new this([1, 0, 0, 0,
+                     0, 1, 0, 0,
+                     0, 0, 1, 0,
+                     0, 0, tz, 1]);
   }
 
   static rotationX(angleRadians){
@@ -50,6 +71,27 @@ class Matrix44 {
   static scale(sx, sy, sz){
     return new this([sx, 0, 0, 0,
                      0, sy, 0, 0,
+                     0, 0, sz, 0,
+                     0, 0, 0, 1]);
+  }
+
+  static scaleX(sx){
+    return new this([sx, 0, 0, 0,
+                     0, 1, 0, 0,
+                     0, 0, 1, 0,
+                     0, 0, 0, 1]);
+  }
+
+  static scale(sy){
+    return new this([1, 0, 0, 0,
+                     0, sy, 0, 0,
+                     0, 0, 1, 0,
+                     0, 0, 0, 1]);
+  }
+
+  static scale(sz){
+    return new this([1, 0, 0, 0,
+                     0, 1, 0, 0,
                      0, 0, sz, 0,
                      0, 0, 0, 1]);
   }
@@ -216,7 +258,7 @@ class Matrix44 {
   }
 
   //b*a
-  multiply(a, b){
+  static multiply(a, b){
     a = a.getMatrix();
     let a00 = a[0 * 3 + 0];
     let a01 = a[0 * 3 + 1];
@@ -253,7 +295,7 @@ class Matrix44 {
     let b32 = b[3 * 3 + 2];
     let b33 = b[3 * 3 + 3];
 
-    this.matrix = [
+    return new this([
       b00 * a00 + b01 * a10 + b02 * a20 + b03 * a30,
       b00 * a01 + b01 * a11 + b02 * a21 + b03 * a31,
       b00 * a02 + b01 * a12 + b02 * a22 + b03 * a32,
@@ -273,7 +315,17 @@ class Matrix44 {
       b30 * a01 + b31 * a11 + b32 * a21 + b33 * a31,
       b30 * a02 + b31 * a12 + b32 * a22 + b33 * a32,
       b30 * a03 + b31 * a13 + b32 * a23 + b33 * a33,
-    ];
+    ]);
+  }
+
+  //0 index --> first matrix from right!
+  static multiplyArray(matrixArray){
+    let matrix = Matrix44.identity();
+    for(let i = 0; i < matrixArray.length; i++){
+      matrix = Matrix44.multiply(matrix, matrixArray[i]);
+    }
+
+    return matrix;
   }
 
   setMatrix(matrix){this.matrix = matrix;}
