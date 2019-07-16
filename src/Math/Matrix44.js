@@ -82,20 +82,21 @@ class Matrix44 {
                      0, 0, 0, 1]);
   }
 
-  static scale(sy){
+  static scaleY(sy){
     return new this([1, 0, 0, 0,
                      0, sy, 0, 0,
                      0, 0, 1, 0,
                      0, 0, 0, 1]);
   }
 
-  static scale(sz){
+  static scaleZ(sz){
     return new this([1, 0, 0, 0,
                      0, 1, 0, 0,
                      0, 0, sz, 0,
                      0, 0, 0, 1]);
   }
 
+  //fix!
   static transponse(){
     let a00 = this.matrix[0 * 3 + 0];
     let a01 = this.matrix[0 * 3 + 1];
@@ -326,6 +327,20 @@ class Matrix44 {
     }
 
     return matrix;
+  }
+
+  /*static buildOrtographich(dx, dy, dz, devDx, devDy, devDz){
+    return new this([2 * devDx,   0,           0,     -(dx) * devDx,
+                         0,    2 * devDy,      0,     -(dy) * devDy,
+                         0,       0,       2 * devDz, -(dz) * devDz,
+                         0,       0,           0,           1]);
+  }*/
+
+  static buildOrtographich(dx, dy, dz, devDx, devDy, devDz){
+    return new this([2 * devDx,   0,           0,     0,
+                         0,    2 * devDy,      0,     0,
+                         0,       0,       2 * devDz, 0,
+                         -(dx) * devDx,       -(dy) * devDy,           -(dz) * devDz,           1]);
   }
 
   setMatrix(matrix){this.matrix = matrix;}
