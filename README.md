@@ -17,4 +17,7 @@ To do:
 -Camera abstraction ☐  
 -Object manipulation ✅  -- TODO: vector matrix multiplication    
 -Sliders for testing object manipulation ✅   
--Rendering multiple objects ☐  
+-Rendering multiple objects ☐    
+
+
+FINIFHED   
