@@ -50,7 +50,7 @@ function setUniforms(){
 
   let manipulationUnform = new ObjectManipulationUniform("u_matrix", "3fv", manipulationArray);
 
-  uniArray = new UniformArray([offsetUniform, manipulationUnform], null, null);
+  let uniArray = new UniformArray([offsetUniform, manipulationUnform], null, null);
 }
 
 function setBuffers(){

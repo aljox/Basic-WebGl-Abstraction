@@ -33,8 +33,8 @@ class Matrix33 {
     let cos = Math.cos(angleRadians);
     let sin = Math.sin(angleRadians);
 
-    return new this([cos, -sin, 0,
-                     sin, cos, 0,
+    return new this([cos, sin, 0,
+                     -sin, cos, 0,
                      0, 0, 1]);
   }
 

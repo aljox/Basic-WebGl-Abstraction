@@ -58,7 +58,7 @@ class Matrix44 {
                      0, 0, 0, 1]);
   }
 
-  static rotationY(angleRadians){
+  static rotationZ(angleRadians){
     let cos = Math.cos(angleRadians);
     let sin = Math.sin(angleRadians);
 

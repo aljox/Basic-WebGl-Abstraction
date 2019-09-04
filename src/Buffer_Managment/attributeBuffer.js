@@ -20,6 +20,7 @@ class AttributeBuffer{
 
   setData(data){this.data = data;}
   setType(type){this.type = type;}
+  setUsage(usage){this.usage = usage;}
 
   getData(){return this.data;}
   getType(){return this.type;}
